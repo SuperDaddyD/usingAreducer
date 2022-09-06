@@ -16,23 +16,26 @@ const PostStateComponent = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(true);
       });
   };
-  useEffect(() => {
-    
-      handleFetch();
-    
-  }, []);
+
+  //   useEffect(() => {
+  //     handleFetch();
+  //   }, []);
+
   return (
     <div>
+      <h1>{data?.title}</h1>
       {loading ? (
         <p style={{ "color": "white" }}>...Loading</p>
       ) : (
         <>
           <p>{data.userId}</p>
-          <button>Click</button>
+          <button onClick={handleFetch}>Call Fetch</button>
         </>
       )}
+      <span>{error && "Some Crap Went South!"}</span>
     </div>
   );
 };
