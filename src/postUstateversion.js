@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PostStateComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -8,17 +8,24 @@ const PostStateComponent = () => {
   const handleFetch = () => {
     fetch("https://jsonplaceholder.typicode.com/posts/1")
       .then((data) => data.json())
-      .then((resp) => setData(resp))
+      .then((resp) =>{
+        console.log('What is resp -->',resp)
+        setData(resp)
+      })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  useEffect(()=>{
+   setTimeout(()=>{
+    handleFetch()
+   },6000)
+  },[])
   return (
     <div>
-      {data.map((item) => (
-        <p>{item.name}</p>
-      ))}
+      {<p>{data.userId}</p>}
     </div>
   );
 };
+
+export default PostStateComponent;
