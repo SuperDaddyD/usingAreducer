@@ -7,6 +7,7 @@ const PostStateComponent = () => {
 
   const handleFetch = () => {
     setLoading(true);
+    setError(false)
     fetch("https://jsonplaceholder.typicode.com/posts/1")
       .then((data) => data.json())
       .then((resp) => {
