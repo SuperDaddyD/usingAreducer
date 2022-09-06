@@ -6,24 +6,33 @@ const PostStateComponent = () => {
   const [error, setError] = useState(false);
 
   const handleFetch = () => {
+    setLoading(true);
     fetch("https://jsonplaceholder.typicode.com/posts/1")
       .then((data) => data.json())
-      .then((resp) =>{
-        console.log('What is resp -->',resp)
-        setData(resp)
+      .then((resp) => {
+        console.log("What is resp -->", resp);
+        setData(resp);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  useEffect(()=>{
-   setTimeout(()=>{
-    handleFetch()
-   },6000)
-  },[])
+  useEffect(() => {
+    
+      handleFetch();
+    
+  }, []);
   return (
     <div>
-      {<p>{data.userId}</p>}
+      {loading ? (
+        <p style={{ "color": "white" }}>...Loading</p>
+      ) : (
+        <>
+          <p>{data.userId}</p>
+          <button>Click</button>
+        </>
+      )}
     </div>
   );
 };
